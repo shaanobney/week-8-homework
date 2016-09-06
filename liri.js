@@ -1,5 +1,5 @@
 var keys = require;
-var command = process.argv[2];
+var query = process.argv[2];
 var fs = require('fs');
 var Twitter = require('twitter');
 var keys = require ("./keys.js");
@@ -10,7 +10,7 @@ var client = new Twitter({
   	access_token_secret: keys.twitterKeys.access_token_secret,
 });
 
-if (command == "my-tweets") {
+if (query == "my-tweets") {
 	var params = {screen_name: 'ShaanObney', count: 20};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 		if (!error) {
@@ -21,7 +21,7 @@ if (command == "my-tweets") {
 	});
 }
 
-if (command == "spotify-this-song") {
+if (query == "spotify-this-song") {
 	var songName = process.argv[3];
 	var spotify = require('spotify');
 	
@@ -49,7 +49,7 @@ if (command == "spotify-this-song") {
 	});
 }
 
-if (command == "movie-this") {
+if (query == "movie-this") {
 	var movie = process.argv[3];
 	var request = require('request');
 	request('http://www.omdbapi.com/?t='+ movie +'&y=&plot=short&tomatoes=true&r=json', function (error, response, body) {
@@ -68,7 +68,7 @@ if (command == "movie-this") {
  });
 }
 
-if (command == "do-what-it-says") {
+if (query == "do-what-it-says") {
 	var spotify = require('spotify');
 	var media = fs.readFileSync('random.txt' , "utf8");
 	spotify.search({ type: 'track', query: media }, function(err, data){
